@@ -1,1 +1,59 @@
-#
+# importing norm from scipy.stats...
+from scipy.stats import norm
+
+# makes critical_z_value named variable for def function...
+def critical_z_value(p):
+    
+# value for norm_dist...    
+    norm_dist = norm(loc=0.0, scale=1.0)
+    
+# value for_left_tail_area... 
+    left_tail_area = (1.0 -p) / 2.0
+    
+# value for upper_area...    
+    upper_area = 1.0 - ((1.0 - p) / 2.0)
+    
+# returning norm_dist.ppf for left_tail_area and norm_dist.ppf upper_area...  
+    return norm_dist.ppf(left_tail_area), norm_dist.ppf(upper_area)
+    
+# prints critical_z_value for p=.95
+print(critical_z_value(p=.95))
+
+# importing sqrt from math...
+# importing norm from scipy.stats...
+from math import sqrt  
+from scipy.stats import norm
+
+# makes critical_z_value named function for def...
+def critical_z_value(p):
+    
+# value for norm_dist...    
+    norm_dist = norm(loc=0.0, scale=1.0)
+    
+# value for_left_tail_area... 
+    left_tail_area = (1.0 -p) / 2.0
+    
+# value for upper_area...    
+    upper_area = 1.0 - ((1.0 - p) / 2.0)
+    
+# returning norm_dist.ppf for left_tail_area and norm_dist.ppf upper_area...  
+    return norm_dist.ppf(left_tail_area), norm_dist.ppf(upper_area)
+
+# makes confidence_interval named variable for def function...
+# sample size must be greater than 30.
+def confidence_interval(p, sample_mean, sample_std, n):
+    
+# value for lower, upper...    
+    lower, upper = critical_z_value(p)    
+
+# value for lower_ci...        
+    lower_ci = lower * (sample_std / sqrt(n))
+    
+# value for upper_ci...    
+    upper_ci = upper * (sample_std /sqrt(n))
+   
+# returns sample_mean + lower_ci, sample_mean + upper_ci... 
+    return sample_mean + lower_ci, sample_mean + upper_ci
+      
+# prints confidence_interval for p=.95 ,sample_mean=64.408,sample_std=2.05, n=31
+print(confidence_interval(p=.95 ,sample_mean=64.408,sample_std=2.05, n=31))
